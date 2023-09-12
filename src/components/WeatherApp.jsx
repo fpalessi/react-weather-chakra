@@ -1,4 +1,4 @@
-import { Box, Grid, Heading, Text } from "@chakra-ui/react";
+import { Box, Center, Grid, Heading, Text } from "@chakra-ui/react";
 import useWeather from "../hooks/useWeather";
 import Loader from "./Loader";
 import WeatherCard from "./WeatherCard";
@@ -7,7 +7,7 @@ import GoogleMap from "./GoogleMap";
 import ForecastCard from "./ForecastCard";
 
 const Index = () => {
-  const { currentWeatherData, forecastData, isLoading } = useWeather();
+  const { currentWeatherData, forecastData, isLoading, isError } = useWeather();
 
   const { name, main, weather, wind, visibility } = currentWeatherData;
 
@@ -16,6 +16,9 @@ const Index = () => {
   if (Object.keys(currentWeatherData).length === 0) return null;
 
   if (isLoading) return <Loader />;
+
+  if (isError)
+    return <Center mt={["200px"]}>Algo falló inesperadamente.</Center>;
 
   return (
     <>
